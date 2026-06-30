@@ -1,0 +1,27 @@
+{
+  "collections": [
+    {
+      "name": "projects",
+      "documentId": "projectId",
+      "description": "User projects",
+      "fields": {
+        "userId": "string",
+        "name": "string",
+        "clientName": "string",
+        "createdAt": "string",
+        "updatedAt": "string",
+        "items": "array"
+      },
+      "rules": [
+        {
+          "allow": ["read", "delete"],
+          "condition": "request.auth != null && request.auth.uid == resource.data.userId"
+        },
+        {
+          "allow": ["create", "update"],
+          "condition": "request.auth != null && request.auth.uid == request.resource.data.userId"
+        }
+      ]
+    }
+  ]
+}
